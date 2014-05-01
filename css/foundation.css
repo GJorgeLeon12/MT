@@ -1899,11 +1899,26 @@ meta.foundation-mq-topbar {
     .button-bar .button-group div {
       overflow: hidden; }
 
+/* Barra */
+.barra {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #d8d8d8;
+	border-radius: 5px;
+	padding: 1.25rem;
+	color: #2B2B2B;
+	background: #14A6EB;
+}
+.barra p{
+	margin-top: -10px;
+}
+
 /* Panels */
 .panel {
   border-style: solid;
   border-width: 1px;
   border-color: #d8d8d8;
+  border-radius: 5px;
   margin-bottom: 1.25rem;
   padding: 1.25rem;
   background: #14A6EB; }
@@ -2812,11 +2827,13 @@ td {
 
 /* Default Link Styles */
 a {
-  color: #008cba;
+  color: #333333;
   text-decoration: none;
   line-height: inherit; }
   a:hover, a:focus {
-    color: #0078a0; }
+	color: #0078a0;
+	margin-top: -17px;
+}
   a img {
     border: none; }
 
