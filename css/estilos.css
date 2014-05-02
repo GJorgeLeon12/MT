@@ -23,3 +23,19 @@ div.Menu:hover {
 	background: #0d5994;
 	color: #abedde;
 }
+a:link {
+	text-decoration:none;
+	color:#000000;
+}
+a:visited {
+	text-decoration:none;
+	color:#000000;
+}
+a:active {
+	text-decoration:none;
+	color:#ff0000;
+} 
+a:hover {
+	text-decoration:underline;
+	color:#999999;
+} 
