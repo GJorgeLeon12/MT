@@ -39,16 +39,18 @@ body {
   font-size: 100%; }
 
 body {
-  background: #F5F5F5;
-  color: #222222;
-  padding: 0;
-  margin: 0;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1;
-  position: relative;
-  cursor: default; }
+	background: #F5F5F5;
+	color: #222222;
+	padding: 0;
+	margin: 0;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	position: relative;
+	cursor: default;
+	font-size: 0rem;
+}
 
 a:hover {
   cursor: pointer; }
@@ -1104,7 +1106,8 @@ button, .button {
   button:hover, button:focus, .button:hover, .button:focus {
     background-color: #007095; }
   button:hover, button:focus, .button:hover, .button:focus {
-    color: white; }
+	color: white;
+}
   button.secondary, .button.secondary {
     background-color: #e7e7e7;
     border-color: #b9b9b9;
@@ -2885,7 +2888,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.6875rem; }
+}
 
 h3 {
   font-size: 1.375rem; }
@@ -3049,7 +3052,7 @@ blockquote p {
     font-size: 2.75rem; }
 
   h2 {
-    font-size: 2.3125rem; }
+    font-size: 4.3125rem; }
 
   h3 {
     font-size: 1.6875rem; }
