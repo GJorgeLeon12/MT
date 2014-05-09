@@ -10,8 +10,10 @@
 
 	<script>
 
-	var guardar;
 	var myArray;
+	var nivel = 3;
+	var anchoDiv = 1;
+	var introducidos = 0;
 
 	document.onkeydown = keyListener;
 /*
@@ -29,60 +31,102 @@ function keyListener(e){
 		e = window.event;
 	}
 	if(e.keyCode==48){
-		guardar=0; 
-		AgregarLineaDeTexto(0);
+		agregarNumero(0);
 	}
 	if(e.keyCode==49){
-		AgregarLineaDeTexto(1);
-		guardar=1 
+		agregarNumero(1);
 	}
 	if(e.keyCode==50){
-		AgregarLineaDeTexto(2);
-		guardar=2 
+		agregarNumero(2);
 	}
 	if(e.keyCode==51){
-		AgregarLineaDeTexto(3);
-		guardar=3 
+		agregarNumero(3);
 	}
 	if(e.keyCode==52){
-		AgregarLineaDeTexto(4);
-		guardar=4 
+		agregarNumero(4);
 	}
 	if(e.keyCode==53){
-		AgregarLineaDeTexto(5);
-		guardar=5 
+		agregarNumero(5);
 	}
 	if(e.keyCode==54){
-		AgregarLineaDeTexto(6);
-		guardar=6 
+		agregarNumero(6);
 	}
 	if(e.keyCode==55){
-		AgregarLineaDeTexto(7);
-		guardar=7 
+		agregarNumero(7);
 	}
 	if(e.keyCode==56){
-		AgregarLineaDeTexto(8);
-		guardar=8 
+		agregarNumero(8);
 	}
 	if(e.keyCode==57){
-		AgregarLineaDeTexto(9);
-		guardar=9 
+		agregarNumero(9);
 	}
 	if(e.keyCode==82){
-		document.getElementById("texto_chat").innerHTML = "";// Agrego nueva linea antes
-		/*elemento=document.getElementById('divStart');
-		elemento.parentNode.removeChild(elemento);*/
+		limpiarDivNumeros();
+		ponerAncho();
 	}
+}
 
+function agregarNumero(numero){
+	if(introducidos < nivel){
+		if(document.getElementById("textoDiv1").innerHTML == ""){
+			//alert("Div1 Vacio!");
+			AgregarLineaDeTexto(numero, "1");
+			introducidos++;
+		}else if(document.getElementById("textoDiv2").innerHTML == ""){
+			//alert("Div2 Vacio!");
+			AgregarLineaDeTexto(numero, "2");
+			introducidos++;
+		}else if(document.getElementById("textoDiv3").innerHTML == ""){
+			//alert("Div3 Vacio!");
+			AgregarLineaDeTexto(numero, "3");
+			introducidos++;
+		}else if(document.getElementById("textoDiv4").innerHTML == ""){
+			//alert("Div4 Vacio!");
+			AgregarLineaDeTexto(numero, "4");
+			introducidos++;
+		}else if(document.getElementById("textoDiv5").innerHTML == ""){
+			//alert("Div5 Vacio!");
+			AgregarLineaDeTexto(numero, "5");
+			introducidos++;
+		}else if(document.getElementById("textoDiv6").innerHTML == ""){
+			//alert("Div6 Vacio!");
+			AgregarLineaDeTexto(numero, "6");
+			introducidos++;
+		}else if(document.getElementById("textoDiv7").innerHTML == ""){
+			//alert("Div7 Vacio!");
+			AgregarLineaDeTexto(numero, "7");
+			introducidos++;
+		}
+	}else{
+		alert("7 INTRO");
+	}
+}
+
+function limpiarDivNumeros(){
+	introducidos = 0;
+	document.getElementById("textoDiv1").innerHTML =  "";
+	document.getElementById("textoDiv2").innerHTML =  "";
+	document.getElementById("textoDiv3").innerHTML =  "";
+	document.getElementById("textoDiv4").innerHTML =  "";
+	document.getElementById("textoDiv5").innerHTML =  "";
+	document.getElementById("textoDiv6").innerHTML =  "";
+	document.getElementById("textoDiv7").innerHTML =  "";
+}
+function ponerAncho(){
+	if(anchoDiv <= nivel){
+		document.getElementById("textoDiv" + anchoDiv) 
+		.style.width="70px";
+		anchoDiv++;
+		ponerAncho();
+	}
 }
 
 function eliminarIntro(){
 	elemento=document.getElementById('divStart');
 	elemento.parentNode.removeChild(elemento);
 }
-
-function AgregarLineaDeTexto(TextoLinea) {
-	document.getElementById("texto_chat").innerHTML +=  TextoLinea;// Agrego nueva linea antes
+function AgregarLineaDeTexto(TextoLinea, divAgregar) {
+	document.getElementById("textoDiv" + divAgregar).innerHTML +=  TextoLinea;// Agrego nueva linea antes
 }
 
 function doLoad(){
@@ -108,11 +152,17 @@ function refresh(){
 				Aqui Instrucciones<br>By Puddul.
 			</div>
 			<div style="z-index:2; position: absolute; padding-top:300px; padding-left:260px;">
-				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro();" onLoad="doLoad();">
+				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro();ponerAncho();" onLoad="doLoad();">
 			</div>
 		</div>
 		<div id="texto_chat" class="JuegoTexto" style="font-size:30px; z-index:1;" align="center">
-			<h2> Este texto no va a desaparecer... </h2>
+			<div id="textoDiv1" class="divNumerosUsr"></div>
+			<div id="textoDiv2" class="divNumerosUsr"></div>
+			<div id="textoDiv3" class="divNumerosUsr"></div>
+			<div id="textoDiv4" class="divNumerosUsr"></div>
+			<div id="textoDiv5" class="divNumerosUsr"></div>
+			<div id="textoDiv6" class="divNumerosUsr"></div>
+			<div id="textoDiv7" class="divNumerosUsr"></div>
 		</div>
 		<div class="JuegoTexto" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
