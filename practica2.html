@@ -159,7 +159,7 @@ function mensaje(win , fromm){//Despliega si gano o perdio ese nivel
 		if(win){
 			document.getElementById("Mensaje").innerHTML =  "</b>Buen Trabajo!</b>";
 		}else{
-			document.getElementById("Mensaje").innerHTML =  "</b>Error! intentalo de nuevo!</b>" + msg;
+			document.getElementById("Mensaje").innerHTML =  "Error! intentalo de nuevo!" + msg;
 		}
 		setTimeout( "mensaje(true, 2)", 3500 );
 	}else{
@@ -294,12 +294,10 @@ function getPuntuacion(){//Obtienes la Puntuacion
 			<div id="textoDiv6" class="divNumerosUsrCls"></div>
 			<div id="textoDiv7" class="divNumerosUsrCls"></div>
 		</div>
-		<div id="Mensaje" style="font-size:35px; z-index:3;padding-top:190px; position:absolute; width:700px;" align="center"></div>
+		<div id="Mensaje" style="font-size:33px; font-weight:bold; z-index:3;padding-top:190px; position:absolute; width:700px;" align="center"></div>
 
-		<div class="JuegoTextoCls" style="z-index:3; padding-top:430px; font-size:40px;" align="right">
-			<img src="./img/Puntuacion.png" width="180" height="45" style="padding-right: 100px; z-index:8; display:inline-block;">
-			<div id="puntuacion" style="z-index:9; display:inline-block; padding-right:25px; ">0</div>
-		</div>
+		<img src="./img/Puntuacion.png" width="180" height="45" style="z-index: 3;padding-left: 400px; margin-top: 430px; position: absolute;">
+		<div id="puntuacion" style="z-index: 99;padding-left: 620px; margin-top: 420px; position: absolute; font-size: 50px;">0</div>
 		<div class="JuegoTextoCls" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
 		</div>
