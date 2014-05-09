@@ -12,6 +12,7 @@
 		
 		var guardar;
 		var myArray;
+		var contador;
 
 		document.onkeydown = keyListener;
 
@@ -54,6 +55,13 @@
 
 		function AgregarLineaDeTexto(TextoLinea) {
 	        document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva linea antes
+	        setTimeout(contar,500);
+
+	    }	
+
+
+	    function contar(){
+	    	setInterval(function(){alert("Hello")},1000);
 	    }
 
 	</script>
@@ -61,12 +69,9 @@
 
 </head>	
 <body>
-	<div class="row">
-		<div class="large-12 colums">
-			<div id="texto_chat" style="font-size:30px">
-				<p> Este texto no va a desaparecer... </p>
-			</div>
-		</div>
+	<div id="texto_chat" style="font-size:30px">
+		<p> Este texto no va a desaparecer... </p>
+		<input type="button" value="Contar" onclick="contar()"/>
 	</div>
 </body>
 </html>
