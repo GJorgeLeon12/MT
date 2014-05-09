@@ -16,7 +16,7 @@
 	var ponerNumero = 1;
 	var introducidos = 0;
 	var numChecar = 1;
-	var win = false;
+	var ganoNivel = false;
 	var iniciar = false;
 
 	document.onkeydown = keyListener;
@@ -113,23 +113,27 @@ function agregarNumero(numero){
 }
 
 function checar(){
-	while(numChecar < nivel){
+	while(numChecar <= nivel){
+		var tmp1;
+		var tmp2;
+		//alert(document.getElementById("numeroDiv" + numChecar).innerHTML +"numeroDiv" + numChecar + " - " +document.getElementById("textoDiv" + numChecar).innerHTML + "textoDiv" + numChecar);
 		if(document.getElementById("numeroDiv" + numChecar).innerHTML == document.getElementById("textoDiv" + numChecar).innerHTML){
 			numChecar++;
-			win = true;
+			ganoNivel = true;
 		}else{
-			win = false;
+			ganoNivel = false;
+			alert(document.getElementById("numeroDiv" + numChecar).innerHTML + " --- " + document.getElementById("textoDiv" + numChecar).innerHTML);
 			break;
 		}
 	}
-	if(win == true){
-		//alert("win");
-		//pasoNivel();
+	if(ganoNivel == true){
+		alert("win");
+		pasoNivel();
 	}else{
-		//alert("loose");
-		//falloNivel();
+		alert("loose");
+		falloNivel();
 	}
-	pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
+	//pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
 	numChecar = 1;
 	win = false;
 }
@@ -143,11 +147,13 @@ function pasoNivel () {
 
 function falloNivel(){
 	nivel = 3;
+	reIniciar();
 }
 
 function reIniciar(){
 	ponerNumero = 1;
 	anchoDiv = 1;
+	ocultarDiv();
 	limpiarDivNumeros();
 	ponerAncho();
 	generarNumeros();	
@@ -171,22 +177,32 @@ function limpiarDivNumeros(){
 	document.getElementById("numeroDiv6").innerHTML =  "";
 	document.getElementById("numeroDiv7").innerHTML =  "";
 }
+
 function ponerAncho(){
 	if(anchoDiv <= nivel){
-		document.getElementById("textoDiv" + anchoDiv) 
-		.style.width="70px";
-		muestra_oculta("textoDiv" + anchoDiv);
+		//document.getElementById("textoDiv" + anchoDiv) 
+		//.style.width="70px";
+		muestra_oculta("textoDiv" + anchoDiv, true);
 		anchoDiv++;
 		ponerAncho();
 	}
 }
 
-function generarNumeros () {
+function ocultarDiv(){
+	var ocultarActual = 1;
+	while(ocultarActual <= 7){
+		muestra_oculta("textoDiv" + ocultarActual, false);
+		muestra_oculta("numeroDiv" + ocultarActual, false);
+		ocultarActual++;
+	}
+}
+
+function generarNumeros() {
 	if(ponerNumero <= nivel){
-		document.getElementById("numeroDiv" + ponerNumero) 
-		.style.width="70px";
+		//document.getElementById("numeroDiv" + ponerNumero) 
+		//.style.width="70px";
 		document.getElementById("numeroDiv" + ponerNumero).innerHTML =  Math.floor(Math.random() * 9);
-		muestra_oculta("numeroDiv" + ponerNumero);
+		muestra_oculta("numeroDiv" + ponerNumero, true);
 		ponerNumero++;
 		generarNumeros();
 	}
@@ -210,10 +226,14 @@ function refresh(){
 	elemento.parentNode.removeChild(elemento);
 }
 
-function muestra_oculta(id){
+function muestra_oculta(id, ocultamuestra){
 	if (document.getElementById){ //se obtiene el id
 		var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
-		el.style.display = (el.style.display == 'none') ? 'none' : 'inline-block'; //damos un atributo display:none que oculta el div
+		if(ocultamuestra == true){
+			el.style.display = 'inline-block';
+		}else{
+			el.style.display = 'none';
+		}
 	}
 }
 window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
@@ -236,8 +256,8 @@ window.onload = function(){/*hace que se cargue la función lo que predetermina 
 			</div>
 		</div>
 		<div id="texto_chat" class="JuegoTextoCls" style="font-size:80px; z-index:2;" align="center">
-			<div id="numeroDiv2" class="divNumeroCls"></div>
 			<div id="numeroDiv1" class="divNumeroCls"></div>
+			<div id="numeroDiv2" class="divNumeroCls"></div>
 			<div id="numeroDiv3" class="divNumeroCls"></div>
 			<div id="numeroDiv4" class="divNumeroCls"></div>
 			<div id="numeroDiv5" class="divNumeroCls"></div>

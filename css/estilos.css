@@ -30,12 +30,14 @@
 	filter:alpha(opacity=95); /* For IE8 and earlier */
 	z-index:100;
 }.divNumerosUsrCls{
+	width: 70px;
 	height:100px;
 	background-color: white;
 	display:none;
 	margin-top: 275px;
 	z-index: 5;
 }.divNumeroCls{
+	width: 70px;
 	height:100px;
 	background-color: white;
 	display:none;
