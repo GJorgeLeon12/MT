@@ -13,7 +13,11 @@
 	var myArray;
 	var nivel = 3;
 	var anchoDiv = 1;
+	var ponerNumero = 1;
 	var introducidos = 0;
+	var numChecar = 1;
+	var win = false;
+	var iniciar = false;
 
 	document.onkeydown = keyListener;
 /*
@@ -26,44 +30,49 @@ return /\d/.test(String.fromCharCode(keynum));
 }
 */
 function keyListener(e){
-
-	if(!e){
-		e = window.event;
+	if(iniciar == true){
+		if(!e){
+			e = window.event;
+		}
+		if(e.keyCode == 48 || e.keyCode == 96){
+			agregarNumero(0);
+		}
+		if(e.keyCode == 49 || e.keyCode == 97){
+			agregarNumero(1);
+		}
+		if(e.keyCode == 50 || e.keyCode == 98){
+			agregarNumero(2);
+		}
+		if(e.keyCode == 51 || e.keyCode == 99){
+			agregarNumero(3);
+		}
+		if(e.keyCode == 52 || e.keyCode == 100){
+			agregarNumero(4);
+		}
+		if(e.keyCode == 53 || e.keyCode == 101){
+			agregarNumero(5);
+		}
+		if(e.keyCode == 54 || e.keyCode == 102){
+			agregarNumero(6);
+		}
+		if(e.keyCode == 55 || e.keyCode == 103){
+			agregarNumero(7);
+		}
+		if(e.keyCode == 56 || e.keyCode == 104){
+			agregarNumero(8);
+		}
+		if(e.keyCode == 57 || e.keyCode == 105){
+			agregarNumero(9);
+		}
+		if(e.keyCode == 82){
+			//limpiarDivNumeros();
+			//reIniciar();
+			muestra_oculta('textoDiv1');
+		}
 	}
-	if(e.keyCode==48){
-		agregarNumero(0);
-	}
-	if(e.keyCode==49){
-		agregarNumero(1);
-	}
-	if(e.keyCode==50){
-		agregarNumero(2);
-	}
-	if(e.keyCode==51){
-		agregarNumero(3);
-	}
-	if(e.keyCode==52){
-		agregarNumero(4);
-	}
-	if(e.keyCode==53){
-		agregarNumero(5);
-	}
-	if(e.keyCode==54){
-		agregarNumero(6);
-	}
-	if(e.keyCode==55){
-		agregarNumero(7);
-	}
-	if(e.keyCode==56){
-		agregarNumero(8);
-	}
-	if(e.keyCode==57){
-		agregarNumero(9);
-	}
-	if(e.keyCode==82){
-		limpiarDivNumeros();
-		ponerAncho();
-	}
+}
+function iniciarF(){
+	iniciar = true;
 }
 
 function agregarNumero(numero){
@@ -97,9 +106,51 @@ function agregarNumero(numero){
 			AgregarLineaDeTexto(numero, "7");
 			introducidos++;
 		}
-	}else{
-		alert("7 INTRO");
 	}
+	if(introducidos == nivel){
+		checar();
+	}
+}
+
+function checar(){
+	while(numChecar < nivel){
+		if(document.getElementById("numeroDiv" + numChecar).innerHTML == document.getElementById("textoDiv" + numChecar).innerHTML){
+			numChecar++;
+			win = true;
+		}else{
+			win = false;
+			break;
+		}
+	}
+	if(win == true){
+		//alert("win");
+		//pasoNivel();
+	}else{
+		//alert("loose");
+		//falloNivel();
+	}
+	pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
+	numChecar = 1;
+	win = false;
+}
+
+function pasoNivel () {
+	if(nivel < 7){
+		nivel++;
+	}
+	reIniciar();
+}
+
+function falloNivel(){
+	nivel = 3;
+}
+
+function reIniciar(){
+	ponerNumero = 1;
+	anchoDiv = 1;
+	limpiarDivNumeros();
+	ponerAncho();
+	generarNumeros();	
 }
 
 function limpiarDivNumeros(){
@@ -111,13 +162,33 @@ function limpiarDivNumeros(){
 	document.getElementById("textoDiv5").innerHTML =  "";
 	document.getElementById("textoDiv6").innerHTML =  "";
 	document.getElementById("textoDiv7").innerHTML =  "";
+
+	document.getElementById("numeroDiv1").innerHTML =  "";
+	document.getElementById("numeroDiv2").innerHTML =  "";
+	document.getElementById("numeroDiv3").innerHTML =  "";
+	document.getElementById("numeroDiv4").innerHTML =  "";
+	document.getElementById("numeroDiv5").innerHTML =  "";
+	document.getElementById("numeroDiv6").innerHTML =  "";
+	document.getElementById("numeroDiv7").innerHTML =  "";
 }
 function ponerAncho(){
 	if(anchoDiv <= nivel){
 		document.getElementById("textoDiv" + anchoDiv) 
 		.style.width="70px";
+		muestra_oculta("textoDiv" + anchoDiv);
 		anchoDiv++;
 		ponerAncho();
+	}
+}
+
+function generarNumeros () {
+	if(ponerNumero <= nivel){
+		document.getElementById("numeroDiv" + ponerNumero) 
+		.style.width="70px";
+		document.getElementById("numeroDiv" + ponerNumero).innerHTML =  Math.floor(Math.random() * 9);
+		muestra_oculta("numeroDiv" + ponerNumero);
+		ponerNumero++;
+		generarNumeros();
 	}
 }
 
@@ -139,32 +210,51 @@ function refresh(){
 	elemento.parentNode.removeChild(elemento);
 }
 
+function muestra_oculta(id){
+	if (document.getElementById){ //se obtiene el id
+		var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+		el.style.display = (el.style.display == 'none') ? 'none' : 'inline-block'; //damos un atributo display:none que oculta el div
+	}
+}
+window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+	muestra_oculta('contenido_a_mostrar');/* "contenido_a_mostrar" es el nombre de la etiqueta DIV que deseamos mostrar */
+}
 </script>
 
 
 </head>	
 <body>
 	<div style="width:700px; height:480px; max-width:700px; max-height:480px;">
-		<div id="divCarga" class="JuegoTexto" style="background-color:black; z-index:101;">
+		<div id="divCarga" class="JuegoTextoCls" style="background-color:black; z-index:101;">
 		</div>
-		<div id="divStart" class="divStart">
+		<div id="divStart" class="divStartCls">
 			<div style="z-index:1; position: absolute; color:white; font-size:50px;">
 				Aqui Instrucciones<br>By Puddul.
 			</div>
 			<div style="z-index:2; position: absolute; padding-top:300px; padding-left:260px;">
-				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro();ponerAncho();" onLoad="doLoad();">
+				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro(); ponerAncho(); generarNumeros(); iniciarF();" onLoad="doLoad();">
 			</div>
 		</div>
-		<div id="texto_chat" class="JuegoTexto" style="font-size:30px; z-index:1;" align="center">
-			<div id="textoDiv1" class="divNumerosUsr"></div>
-			<div id="textoDiv2" class="divNumerosUsr"></div>
-			<div id="textoDiv3" class="divNumerosUsr"></div>
-			<div id="textoDiv4" class="divNumerosUsr"></div>
-			<div id="textoDiv5" class="divNumerosUsr"></div>
-			<div id="textoDiv6" class="divNumerosUsr"></div>
-			<div id="textoDiv7" class="divNumerosUsr"></div>
+		<div id="texto_chat" class="JuegoTextoCls" style="font-size:80px; z-index:2;" align="center">
+			<div id="numeroDiv2" class="divNumeroCls"></div>
+			<div id="numeroDiv1" class="divNumeroCls"></div>
+			<div id="numeroDiv3" class="divNumeroCls"></div>
+			<div id="numeroDiv4" class="divNumeroCls"></div>
+			<div id="numeroDiv5" class="divNumeroCls"></div>
+			<div id="numeroDiv6" class="divNumeroCls"></div>
+			<div id="numeroDiv7" class="divNumeroCls"></div>
 		</div>
-		<div class="JuegoTexto" style="z-index:0;">
+		<div id="texto_chat2" class="JuegoTextoCls" style="font-size:80px; z-index:1;" align="center">
+			<div id="textoDiv1" class="divNumerosUsrCls"></div>
+			<div id="textoDiv2" class="divNumerosUsrCls"></div>
+			<div id="textoDiv3" class="divNumerosUsrCls"></div>
+			<div id="textoDiv4" class="divNumerosUsrCls"></div>
+			<div id="textoDiv5" class="divNumerosUsrCls"></div>
+			<div id="textoDiv6" class="divNumerosUsrCls"></div>
+			<div id="textoDiv7" class="divNumerosUsrCls"></div>
+			
+		</div>
+		<div class="JuegoTextoCls" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
 		</div>
 	</div>

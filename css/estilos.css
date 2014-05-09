@@ -13,13 +13,13 @@
 	padding-top:11px;
 	padding-bottom:11px;
 	text-align: center;
-}.JuegoTexto{
+}.JuegoTextoCls{
 	width:700px;
 	height:480px;
 	max-width:700px;
 	max-height:480px;
 	position:absolute;
-}.divStart{
+}.divStartCls{
 	width:700px;
 	height:480px;
 	max-width:700px;
@@ -29,13 +29,18 @@
 	opacity:0.95;
 	filter:alpha(opacity=95); /* For IE8 and earlier */
 	z-index:100;
-}.divNumerosUsr{
-	font-size: 80px;
+}.divNumerosUsrCls{
 	height:100px;
 	background-color: white;
-	display:inline-block;
+	display:none;
 	margin-top: 275px;
 	z-index: 5;
+}.divNumeroCls{
+	height:100px;
+	background-color: white;
+	display:none;
+	margin-top: 63px;
+	z-index: 6;
 }
 div.Menu {
 	color: #0000D9;
