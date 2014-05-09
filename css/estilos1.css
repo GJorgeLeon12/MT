@@ -26,8 +26,15 @@
 	max-width:700px;
 	max-height:480px;
 	position:absolute;
-	background-color: rgb(6, 60, 16);
-	opacity:0.65;
+	background-color: #7CB6C2;
+	background-image:-webkit-gradient(  
+    linear,  
+    right top,  
+    left bottom,  
+    color-stop(0.1, #94DAE8),  
+    color-stop(0.3, #87C7D4),  
+    color-stop(0.9, #7CB6C2));
+	opacity:0.9999995;
 	filter:alpha(opacity=95); /* For IE8 and earlier */
 	z-index:100;
 }.divNumerosUsrCls{
