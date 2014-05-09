@@ -9,77 +9,90 @@
 
 
 	<script>
-		
-		var guardar;
-		var myArray;
 
-		document.onkeydown = keyListener;
+	var guardar;
+	var myArray;
+
+	document.onkeydown = keyListener;
 /*
-		function justNumbers(e){
-			var keynum = window.event ? window.event.keyCode : e.which;
-			if ((keynum == 8) || (keynum == 46))
-			return true;
-			 
-			return /\d/.test(String.fromCharCode(keynum));
-		}
+function justNumbers(e){
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+
+return /\d/.test(String.fromCharCode(keynum));
+}
 */
-		function keyListener(e){
-			
-		   if(!e){
-		      e = window.event;
-		   }
-		   if(e.keyCode==48){
-		    guardar=0; 
-		    AgregarLineaDeTexto(0);
-		   }
-		   if(e.keyCode==49){
-		   	AgregarLineaDeTexto(1);
-		    guardar=1 
-		   }
-		   if(e.keyCode==50){
-		   	AgregarLineaDeTexto(2);
-		    guardar=2 
-		   }
-		   if(e.keyCode==51){
-		   	AgregarLineaDeTexto(3);
-		    guardar=3 
-		   }
-		   if(e.keyCode==52){
-		   	AgregarLineaDeTexto(4);
-		    guardar=4 
-		   }
-		   if(e.keyCode==53){
-		   	AgregarLineaDeTexto(5);
-		    guardar=5 
-		   }
-		   if(e.keyCode==54){
-		   	AgregarLineaDeTexto(6);
-		    guardar=6 
-		   }
-		   if(e.keyCode==55){
-		   	AgregarLineaDeTexto(7);
-		    guardar=7 
-		   }
-		   if(e.keyCode==56){
-		   	AgregarLineaDeTexto(8);
-		    guardar=8 
-		   }
-		   if(e.keyCode==57){
-		   	AgregarLineaDeTexto(9);
-		    guardar=9 
-		   }
-		   
-		}
+function keyListener(e){
 
-		function AgregarLineaDeTexto(TextoLinea) {
-	        document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva linea antes
-	    }
+	if(!e){
+		e = window.event;
+	}
+	if(e.keyCode==48){
+		guardar=0; 
+		AgregarLineaDeTexto(0);
+	}
+	if(e.keyCode==49){
+		AgregarLineaDeTexto(1);
+		guardar=1 
+	}
+	if(e.keyCode==50){
+		AgregarLineaDeTexto(2);
+		guardar=2 
+	}
+	if(e.keyCode==51){
+		AgregarLineaDeTexto(3);
+		guardar=3 
+	}
+	if(e.keyCode==52){
+		AgregarLineaDeTexto(4);
+		guardar=4 
+	}
+	if(e.keyCode==53){
+		AgregarLineaDeTexto(5);
+		guardar=5 
+	}
+	if(e.keyCode==54){
+		AgregarLineaDeTexto(6);
+		guardar=6 
+	}
+	if(e.keyCode==55){
+		AgregarLineaDeTexto(7);
+		guardar=7 
+	}
+	if(e.keyCode==56){
+		AgregarLineaDeTexto(8);
+		guardar=8 
+	}
+	if(e.keyCode==57){
+		AgregarLineaDeTexto(9);
+		guardar=9 
+	}
+	if(e.keyCode==82){
+		elemento=document.getElementById('divStart');
+		elemento.parentNode.removeChild(elemento);
+	}
 
-	</script>
+}
+
+function AgregarLineaDeTexto(TextoLinea) {
+document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva linea antes
+}
+
+</script>
 
 
 </head>	
 <body>
-	<div id="texto_chat" style="font-size:30px"><h2> Este texto no va a desaparecer... </h2></div>
+	<div style="width:700px; height:480px; max-width:700px; max-height:480px;">
+		<div id="divStart" class="divStart">
+		</div>
+		<div id="texto_chat" class="JuegoTexto" style="font-size:30px; z-index:10;">
+			<h2> Este texto no va a desaparecer... </h2>
+		</div>
+		<div class="JuegoTexto" style="z-index:-10;">
+			<img src="./img/fondo.png" width="700" height="480">
+		</div>
+	</div>
 </body>
 </html>

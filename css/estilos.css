@@ -6,16 +6,29 @@
 	padding-top:11px;
 	padding-bottom:11px;
 	text-align: center;
-}
-.MenuOn{
+}.MenuOn{
 	background-color:#f4d000;
 	width:200px;
 	display:inline-block;
 	padding-top:11px;
 	padding-bottom:11px;
 	text-align: center;
+}.JuegoTexto{
+	width:700px;
+	height:480px;
+	max-width:700px;
+	max-height:480px;
+	position:absolute;
+}.divStart{
+	width:700px;
+	height:480px;
+	max-width:700px;
+	max-height:480px;
+	position:absolute;
+	background-color: black;
+	opacity:0.9;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
 }
-
 div.Menu {
 	color: #0000D9;
 }
@@ -38,4 +51,4 @@ a:active {
 a:hover {
 	text-decoration:underline;
 	color:#999999;
-} 
+}
