@@ -26,8 +26,9 @@
 	max-height:480px;
 	position:absolute;
 	background-color: black;
-	opacity:0.9;
-	filter:alpha(opacity=40); /* For IE8 and earlier */
+	opacity:0.95;
+	filter:alpha(opacity=95); /* For IE8 and earlier */
+	z-index:100;
 }
 div.Menu {
 	color: #0000D9;

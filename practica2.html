@@ -69,14 +69,30 @@ function keyListener(e){
 		guardar=9 
 	}
 	if(e.keyCode==82){
-		elemento=document.getElementById('divStart');
-		elemento.parentNode.removeChild(elemento);
+		document.getElementById("texto_chat").innerHTML = "";// Agrego nueva linea antes
+		/*elemento=document.getElementById('divStart');
+		elemento.parentNode.removeChild(elemento);*/
 	}
 
 }
 
+function eliminarIntro(){
+	elemento=document.getElementById('divStart');
+	elemento.parentNode.removeChild(elemento);
+}
+
 function AgregarLineaDeTexto(TextoLinea) {
-document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva linea antes
+	document.getElementById("texto_chat").innerHTML +=  TextoLinea;// Agrego nueva linea antes
+}
+
+function doLoad(){
+	// the timeout value should be the same as in the "refresh" meta-tag
+	setTimeout( "refresh()", 1000 );
+}
+
+function refresh(){
+	elemento=document.getElementById('divCarga');
+	elemento.parentNode.removeChild(elemento);
 }
 
 </script>
@@ -85,12 +101,20 @@ document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva
 </head>	
 <body>
 	<div style="width:700px; height:480px; max-width:700px; max-height:480px;">
-		<div id="divStart" class="divStart">
+		<div id="divCarga" class="JuegoTexto" style="background-color:black; z-index:101;">
 		</div>
-		<div id="texto_chat" class="JuegoTexto" style="font-size:30px; z-index:10;">
+		<div id="divStart" class="divStart">
+			<div style="z-index:1; position: absolute; color:white; font-size:50px;">
+				Aqui Instrucciones<br>By Puddul.
+			</div>
+			<div style="z-index:2; position: absolute; padding-top:300px; padding-left:260px;">
+				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro();" onLoad="doLoad();">
+			</div>
+		</div>
+		<div id="texto_chat" class="JuegoTexto" style="font-size:30px; z-index:1;" align="center">
 			<h2> Este texto no va a desaparecer... </h2>
 		</div>
-		<div class="JuegoTexto" style="z-index:-10;">
+		<div class="JuegoTexto" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
 		</div>
 	</div>
