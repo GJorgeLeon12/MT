@@ -18,6 +18,7 @@
 	var numChecar = 1;
 	var ganoNivel = false;
 	var iniciar = false;
+	var msg = "";
 
 	document.onkeydown = keyListener;
 /*
@@ -122,15 +123,14 @@ function checar(){
 			ganoNivel = true;
 		}else{
 			ganoNivel = false;
-			alert(document.getElementById("numeroDiv" + numChecar).innerHTML + " --- " + document.getElementById("textoDiv" + numChecar).innerHTML);
+			msg = "(era un " + document.getElementById("numeroDiv" + numChecar).innerHTML + " en vez de " + document.getElementById("textoDiv" + numChecar).innerHTML + ")";
+			//alert(document.getElementById("numeroDiv" + numChecar).innerHTML + " --- " + document.getElementById("textoDiv" + numChecar).innerHTML);
 			break;
 		}
 	}
 	if(ganoNivel == true){
-		alert("win");
 		pasoNivel();
 	}else{
-		alert("loose");
 		falloNivel();
 	}
 	//pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
@@ -142,21 +142,35 @@ function pasoNivel () {
 	if(nivel < 7){
 		nivel++;
 	}
-	reIniciar();
+	reIniciar(true);
 }
 
 function falloNivel(){
 	nivel = 3;
-	reIniciar();
+	reIniciar(false);
 }
 
-function reIniciar(){
+function reIniciar(win){
 	ponerNumero = 1;
 	anchoDiv = 1;
 	ocultarDiv();
 	limpiarDivNumeros();
 	ponerAncho();
-	generarNumeros();	
+	generarNumeros();
+	mensaje(win, 1);
+	timerSup();
+}
+function mensaje(win , fromm){
+	if(fromm == 1){
+		if(win){
+			document.getElementById("Mensaje").innerHTML =  "</b>Buen Trabajo!</b>";
+		}else{
+			document.getElementById("Mensaje").innerHTML =  "</b>Error! intentalo de nuevo!</b>" + msg;
+		}
+		setTimeout( "mensaje(true, 2)", 3500 );
+	}else{
+		document.getElementById("Mensaje").innerHTML =  "";
+	}
 }
 
 function limpiarDivNumeros(){
@@ -236,6 +250,18 @@ function muestra_oculta(id, ocultamuestra){
 		}
 	}
 }
+function timerSup(){
+	setTimeout( "timerOculta()", 1500 );
+}
+
+function timerOculta(){
+	var ocultarActual = 1;
+	while(ocultarActual <= 7){
+		muestra_oculta("numeroDiv" + ocultarActual, false);
+		ocultarActual++;
+	}
+}
+
 window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
 	muestra_oculta('contenido_a_mostrar');/* "contenido_a_mostrar" es el nombre de la etiqueta DIV que deseamos mostrar */
 }
@@ -252,7 +278,7 @@ window.onload = function(){/*hace que se cargue la función lo que predetermina 
 				Aqui Instrucciones<br>By Puddul.
 			</div>
 			<div style="z-index:2; position: absolute; padding-top:300px; padding-left:260px;">
-				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro(); ponerAncho(); generarNumeros(); iniciarF();" onLoad="doLoad();">
+				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro(); ponerAncho(); generarNumeros(); iniciarF(); timerSup();" onLoad="doLoad();">
 			</div>
 		</div>
 		<div id="texto_chat" class="JuegoTextoCls" style="font-size:80px; z-index:2;" align="center">
@@ -272,8 +298,8 @@ window.onload = function(){/*hace que se cargue la función lo que predetermina 
 			<div id="textoDiv5" class="divNumerosUsrCls"></div>
 			<div id="textoDiv6" class="divNumerosUsrCls"></div>
 			<div id="textoDiv7" class="divNumerosUsrCls"></div>
-			
 		</div>
+		<div id="Mensaje" style="font-size:35px; z-index:3;padding-top:190px; position:absolute; width:700px;" align="center"></div>
 		<div class="JuegoTextoCls" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
 		</div>
