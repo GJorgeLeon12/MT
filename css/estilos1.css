@@ -1,0 +1,70 @@
+.MenuOff{
+	height:100%;
+	width:200px;
+	display:inline-block;
+	color:#FFFFFF;
+	padding-top:11px;
+	padding-bottom:11px;
+	text-align: center;
+}.MenuOn{
+	background-color:#f4d000;
+	width:200px;
+	display:inline-block;
+	padding-top:11px;
+	padding-bottom:11px;
+	text-align: center;
+}.JuegoTextoCls{
+	width:700px;
+	height:480px;
+	max-width:700px;
+	max-height:480px;
+	position:absolute;
+	opacity:0.75;
+}.divStartCls{
+	width:700px;
+	height:480px;
+	max-width:700px;
+	max-height:480px;
+	position:absolute;
+	background-color: rgb(6, 60, 16);
+	opacity:0.65;
+	filter:alpha(opacity=95); /* For IE8 and earlier */
+	z-index:100;
+}.divNumerosUsrCls{
+	width: 70px;
+	height:100px;
+	background-color: white;
+	display:none;
+	margin-top: 275px;
+	z-index: 5;
+}.divNumeroCls{
+	width: 70px;
+	height:100px;
+	background-color: white;
+	display:none;
+	margin-top: 63px;
+	z-index: 6;
+}
+div.Menu {
+	color: #0000D9;
+}
+div.Menu:hover {
+	background: #0d5994;
+	color: #abedde;
+}
+a:link {
+	text-decoration:none;
+	color:#000000;
+}
+a:visited {
+	text-decoration:none;
+	color:#000000;
+}
+a:active {
+	text-decoration:none;
+	color:#ff0000;
+} 
+a:hover {
+	text-decoration:underline;
+	color:#999999;
+}

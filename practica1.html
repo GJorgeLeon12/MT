@@ -2,76 +2,316 @@
 <html class="no-js" lang="en">
 <head>
 	<meta charset="utf-8" />
- 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Mental Tech</title>
-	<link rel="stylesheet" href="./css/estilos.css" />
+	<link rel="stylesheet" href="./css/estilos1.css" />
 	<script src="js/vendor/modernizr.js"></script>
 
 
 	<script>
-		
-		var guardar;
-		var myArray;
-		var contador;
 
-		document.onkeydown = keyListener;
+	var myArray;
+	var nivel = 3;
+	var anchoDiv = 1;
+	var ponerNumero = 1;
+	var introducidos = 0;
+	var numChecar = 1;
+	var ganoNivel = false;
+	var iniciar = false;
+	var msg = "";
 
-		function keyListener(e){
-			
-		   if(!e){
-		      e = window.event;
-		   }
-		   if(e.keyCode==48){
-		    AgregarLineaDeTexto(0);
-		   }
-		   if(e.keyCode==49){
-		   	AgregarLineaDeTexto(1);
-		   }
-		   if(e.keyCode==50){
-		   	AgregarLineaDeTexto(2);
-		   }
-		   if(e.keyCode==51){
-		   	AgregarLineaDeTexto(3);
-		   }
-		   if(e.keyCode==52){
-		   	AgregarLineaDeTexto(4);
-		   }
-		   if(e.keyCode==53){
-		   	AgregarLineaDeTexto(5);
-		   }
-		   if(e.keyCode==54){
-		   	AgregarLineaDeTexto(6);
-		   }
-		   if(e.keyCode==55){
-		   	AgregarLineaDeTexto(7);
-		   }
-		   if(e.keyCode==56){
-		   	AgregarLineaDeTexto(8);
-		   }
-		   if(e.keyCode==57){
-		   	AgregarLineaDeTexto(9);
-		   }
+	document.onkeydown = keyListener;
+/*
+function justNumbers(e){
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+
+return /\d/.test(String.fromCharCode(keynum));
+}
+*/
+function keyListener(e){
+	if(iniciar == true){
+		if(!e){
+			e = window.event;
 		}
+		if(e.keyCode == 48 || e.keyCode == 96){
+			agregarNumero(0);
+		}
+		if(e.keyCode == 49 || e.keyCode == 97){
+			agregarNumero(1);
+		}
+		if(e.keyCode == 50 || e.keyCode == 98){
+			agregarNumero(2);
+		}
+		if(e.keyCode == 51 || e.keyCode == 99){
+			agregarNumero(3);
+		}
+		if(e.keyCode == 52 || e.keyCode == 100){
+			agregarNumero(4);
+		}
+		if(e.keyCode == 53 || e.keyCode == 101){
+			agregarNumero(5);
+		}
+		if(e.keyCode == 54 || e.keyCode == 102){
+			agregarNumero(6);
+		}
+		if(e.keyCode == 55 || e.keyCode == 103){
+			agregarNumero(7);
+		}
+		if(e.keyCode == 56 || e.keyCode == 104){
+			agregarNumero(8);
+		}
+		if(e.keyCode == 57 || e.keyCode == 105){
+			agregarNumero(9);
+		}
+		if(e.keyCode == 82){
+			//limpiarDivNumeros();
+			//reIniciar();
+			muestra_oculta('textoDiv1');
+		}
+	}
+}
+function iniciarF(){
+	iniciar = true;
+}
 
-		function AgregarLineaDeTexto(TextoLinea) {
-	        document.getElementById("texto_chat").innerHTML +=  TextoLinea;  // Agrego nueva linea antes
-	        setTimeout(contar,500);
+function agregarNumero(numero){
+	if(introducidos < nivel){
+		if(document.getElementById("textoDiv1").innerHTML == ""){
+			//alert("Div1 Vacio!");
+			AgregarLineaDeTexto(numero, "1");
+			introducidos++;
+		}else if(document.getElementById("textoDiv2").innerHTML == ""){
+			//alert("Div2 Vacio!");
+			AgregarLineaDeTexto(numero, "2");
+			introducidos++;
+		}else if(document.getElementById("textoDiv3").innerHTML == ""){
+			//alert("Div3 Vacio!");
+			AgregarLineaDeTexto(numero, "3");
+			introducidos++;
+		}else if(document.getElementById("textoDiv4").innerHTML == ""){
+			//alert("Div4 Vacio!");
+			AgregarLineaDeTexto(numero, "4");
+			introducidos++;
+		}else if(document.getElementById("textoDiv5").innerHTML == ""){
+			//alert("Div5 Vacio!");
+			AgregarLineaDeTexto(numero, "5");
+			introducidos++;
+		}else if(document.getElementById("textoDiv6").innerHTML == ""){
+			//alert("Div6 Vacio!");
+			AgregarLineaDeTexto(numero, "6");
+			introducidos++;
+		}else if(document.getElementById("textoDiv7").innerHTML == ""){
+			//alert("Div7 Vacio!");
+			AgregarLineaDeTexto(numero, "7");
+			introducidos++;
+		}
+	}
+	if(introducidos == nivel){
+		checar();
+	}
+}
 
-	    }	
+function checar(){
+	while(numChecar <= nivel){
+		var tmp1;
+		var tmp2;
+		//alert(document.getElementById("numeroDiv" + numChecar).innerHTML +"numeroDiv" + numChecar + " - " +document.getElementById("textoDiv" + numChecar).innerHTML + "textoDiv" + numChecar);
+		if(document.getElementById("numeroDiv" + numChecar).innerHTML == document.getElementById("textoDiv" + numChecar).innerHTML){
+			numChecar++;
+			ganoNivel = true;
+		}else{
+			ganoNivel = false;
+			msg = "(era un " + document.getElementById("numeroDiv" + numChecar).innerHTML + " en vez de " + document.getElementById("textoDiv" + numChecar).innerHTML + ")";
+			//alert(document.getElementById("numeroDiv" + numChecar).innerHTML + " --- " + document.getElementById("textoDiv" + numChecar).innerHTML);
+			break;
+		}
+	}
+	if(ganoNivel == true){
+		pasoNivel();
+	}else{
+		falloNivel();
+	}
+	//pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
+	numChecar = 1;
+	win = false;
+}
 
+function pasoNivel () {
+	if(nivel < 7){
+		nivel++;
+	}
+	reIniciar(true);
+	cambiarPuntuacion(100);
+}
 
-	    function contar(){
-	    	setInterval(function(){alert("Hello")},1000);
-	    }
+function falloNivel(){
+	nivel = 3;
+	cambiarPuntuacion(0);
+	reIniciar(false);
+}
 
-	</script>
+function reIniciar(win){
+	ponerNumero = 1;
+	anchoDiv = 1;
+	ocultarDiv();
+	limpiarDivNumeros();
+	ponerAncho();
+	generarNumeros();
+	mensaje(win, 1);
+	timerSup();
+}
+function mensaje(win , fromm){
+	if(fromm == 1){
+		if(win){
+			document.getElementById("Mensaje").innerHTML =  "</b>Buen Trabajo!</b>";
+		}else{
+			document.getElementById("Mensaje").innerHTML =  "</b>Error! intentalo de nuevo!</b>" + msg;
+		}
+		setTimeout( "mensaje(true, 2)", 3500 );
+	}else{
+		document.getElementById("Mensaje").innerHTML =  "";
+	}
+}
+
+function limpiarDivNumeros(){
+	introducidos = 0;
+	document.getElementById("textoDiv1").innerHTML =  "";
+	document.getElementById("textoDiv2").innerHTML =  "";
+	document.getElementById("textoDiv3").innerHTML =  "";
+	document.getElementById("textoDiv4").innerHTML =  "";
+	document.getElementById("textoDiv5").innerHTML =  "";
+	document.getElementById("textoDiv6").innerHTML =  "";
+	document.getElementById("textoDiv7").innerHTML =  "";
+
+	document.getElementById("numeroDiv1").innerHTML =  "";
+	document.getElementById("numeroDiv2").innerHTML =  "";
+	document.getElementById("numeroDiv3").innerHTML =  "";
+	document.getElementById("numeroDiv4").innerHTML =  "";
+	document.getElementById("numeroDiv5").innerHTML =  "";
+	document.getElementById("numeroDiv6").innerHTML =  "";
+	document.getElementById("numeroDiv7").innerHTML =  "";
+}
+
+function ponerAncho(){
+	if(anchoDiv <= nivel){
+		//document.getElementById("textoDiv" + anchoDiv) 
+		//.style.width="70px";
+		muestra_oculta("textoDiv" + anchoDiv, true);
+		anchoDiv++;
+		ponerAncho();
+	}
+}
+
+function ocultarDiv(){
+	var ocultarActual = 1;
+	while(ocultarActual <= 7){
+		muestra_oculta("textoDiv" + ocultarActual, false);
+		muestra_oculta("numeroDiv" + ocultarActual, false);
+		ocultarActual++;
+	}
+}
+
+function generarNumeros() {
+	if(ponerNumero <= nivel){
+		//document.getElementById("numeroDiv" + ponerNumero) 
+		//.style.width="70px";
+		document.getElementById("numeroDiv" + ponerNumero).innerHTML =  Math.floor(Math.random() * 9);
+		muestra_oculta("numeroDiv" + ponerNumero, true);
+		ponerNumero++;
+		generarNumeros();
+	}
+}
+
+function eliminarIntro(){
+	elemento=document.getElementById('divStart');
+	elemento.parentNode.removeChild(elemento);
+}
+function AgregarLineaDeTexto(TextoLinea, divAgregar) {
+	document.getElementById("textoDiv" + divAgregar).innerHTML +=  TextoLinea;// Agrego nueva linea antes
+}
+
+function doLoad(){
+	// the timeout value should be the same as in the "refresh" meta-tag
+	setTimeout( "refresh()", 1000 );
+}
+
+function refresh(){
+	elemento=document.getElementById('divCarga');
+	elemento.parentNode.removeChild(elemento);
+}
+
+function muestra_oculta(id, ocultamuestra){
+	if (document.getElementById){ //se obtiene el id
+		var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+		if(ocultamuestra == true){
+			el.style.display = 'inline-block';
+		}else{
+			el.style.display = 'none';
+		}
+	}
+}
+function timerSup(){
+	setTimeout( "timerOculta()", 500 );
+}
+
+function timerOculta(){
+	var ocultarActual = 1;
+	while(ocultarActual <= 7){
+		muestra_oculta("numeroDiv" + ocultarActual, false);
+		ocultarActual++;
+	}
+}
+function cambiarPuntuacion(puntos){
+	document.getElementById("puntuacion").innerHTML =  puntos;
+}
+window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+	muestra_oculta('contenido_a_mostrar');/* "contenido_a_mostrar" es el nombre de la etiqueta DIV que deseamos mostrar */
+}
+</script>
 
 
 </head>	
 <body>
-	<div id="texto_chat" style="font-size:30px">
-		<p> Este texto no va a desaparecer... </p>
-		<input type="button" value="Contar" onclick="contar()"/>
+	<div style="width:700px; height:480px; max-width:700px; max-height:480px;">
+		<div id="divCarga" class="JuegoTextoCls" style="background-color:black; z-index:101;">
+		</div>
+		<div id="divStart" class="divStartCls">
+			<div style="z-index:1; position: absolute; color:white; font-size:50px;">
+				Aqui Instrucciones<br>By Puddul.
+			</div>
+			<div style="z-index:2; position: absolute; padding-top:300px; padding-left:260px;">
+				<img src="./img/boton.png" width="180" height="80" onClick="eliminarIntro(); ponerAncho(); generarNumeros(); iniciarF(); timerSup();" onLoad="doLoad();">
+			</div>
+		</div>
+		<div id="texto_chat" class="JuegoTextoCls" style="font-size:80px; z-index:2;" align="center">
+			<div id="numeroDiv1" class="divNumeroCls"></div>
+			<div id="numeroDiv2" class="divNumeroCls"></div>
+			<div id="numeroDiv3" class="divNumeroCls"></div>
+			<div id="numeroDiv4" class="divNumeroCls"></div>
+			<div id="numeroDiv5" class="divNumeroCls"></div>
+			<div id="numeroDiv6" class="divNumeroCls"></div>
+			<div id="numeroDiv7" class="divNumeroCls"></div>
+		</div>
+		<div id="texto_chat2" class="JuegoTextoCls" style="font-size:80px; z-index:1;" align="center">
+			<div id="textoDiv1" class="divNumerosUsrCls"></div>
+			<div id="textoDiv2" class="divNumerosUsrCls"></div>
+			<div id="textoDiv3" class="divNumerosUsrCls"></div>
+			<div id="textoDiv4" class="divNumerosUsrCls"></div>
+			<div id="textoDiv5" class="divNumerosUsrCls"></div>
+			<div id="textoDiv6" class="divNumerosUsrCls"></div>
+			<div id="textoDiv7" class="divNumerosUsrCls"></div>
+		</div>
+		<div id="Mensaje" style="font-size:35px; z-index:3;padding-top:190px; position:absolute; width:700px;" align="center"></div>
+
+		<div class="JuegoTextoCls" style="z-index:3; padding-top:430px; font-size:40px;" align="right">
+			<img src="./img/Puntuacion.png" width="180" height="45" style="padding-right: 100px; z-index:8; display:inline-block;">
+			<div id="puntuacion" style="z-index:9; display:inline-block; padding-right:25px; ">0</div>
+		</div>
+		<div class="JuegoTextoCls" style="z-index:0;">
+			<img src="./img/fondo.png" width="700" height="480">
+		</div>
 	</div>
 </body>
 </html>
