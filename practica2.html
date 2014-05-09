@@ -143,10 +143,12 @@ function pasoNivel () {
 		nivel++;
 	}
 	reIniciar(true);
+	cambiarPuntuacion(100);
 }
 
 function falloNivel(){
 	nivel = 3;
+	cambiarPuntuacion(0);
 	reIniciar(false);
 }
 
@@ -261,7 +263,9 @@ function timerOculta(){
 		ocultarActual++;
 	}
 }
-
+function cambiarPuntuacion(puntos){
+	document.getElementById("puntuacion").innerHTML =  puntos;
+}
 window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
 	muestra_oculta('contenido_a_mostrar');/* "contenido_a_mostrar" es el nombre de la etiqueta DIV que deseamos mostrar */
 }
@@ -300,6 +304,11 @@ window.onload = function(){/*hace que se cargue la función lo que predetermina 
 			<div id="textoDiv7" class="divNumerosUsrCls"></div>
 		</div>
 		<div id="Mensaje" style="font-size:35px; z-index:3;padding-top:190px; position:absolute; width:700px;" align="center"></div>
+
+		<div class="JuegoTextoCls" style="z-index:3; padding-top:430px; font-size:40px;" align="right">
+			<img src="./img/Puntuacion.png" width="180" height="45" style="padding-right: 100px; z-index:8; display:inline-block;">
+			<div id="puntuacion" style="z-index:9; display:inline-block; padding-right:25px; ">0</div>
+		</div>
 		<div class="JuegoTextoCls" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
 		</div>
