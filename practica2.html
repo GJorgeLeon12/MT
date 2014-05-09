@@ -30,7 +30,7 @@ return true;
 return /\d/.test(String.fromCharCode(keynum));
 }
 */
-function keyListener(e){
+function keyListener(e){//Listeners!
 	if(iniciar == true){
 		if(!e){
 			e = window.event;
@@ -68,42 +68,35 @@ function keyListener(e){
 		if(e.keyCode == 82){
 			//limpiarDivNumeros();
 			//reIniciar();
-			muestra_oculta('textoDiv1');
+			//muestra_oculta('textoDiv1');
 		}
 	}
 }
-function iniciarF(){
+function iniciarF(){//solo de control, para que no pueda introducir numeros antes de precionar "jugar"
 	iniciar = true;
 }
 
-function agregarNumero(numero){
+function agregarNumero(numero){//busca el 1° div que este disponible
 	if(introducidos < nivel){
 		if(document.getElementById("textoDiv1").innerHTML == ""){
-			//alert("Div1 Vacio!");
 			AgregarLineaDeTexto(numero, "1");
 			introducidos++;
 		}else if(document.getElementById("textoDiv2").innerHTML == ""){
-			//alert("Div2 Vacio!");
 			AgregarLineaDeTexto(numero, "2");
 			introducidos++;
 		}else if(document.getElementById("textoDiv3").innerHTML == ""){
-			//alert("Div3 Vacio!");
 			AgregarLineaDeTexto(numero, "3");
 			introducidos++;
 		}else if(document.getElementById("textoDiv4").innerHTML == ""){
-			//alert("Div4 Vacio!");
 			AgregarLineaDeTexto(numero, "4");
 			introducidos++;
 		}else if(document.getElementById("textoDiv5").innerHTML == ""){
-			//alert("Div5 Vacio!");
 			AgregarLineaDeTexto(numero, "5");
 			introducidos++;
 		}else if(document.getElementById("textoDiv6").innerHTML == ""){
-			//alert("Div6 Vacio!");
 			AgregarLineaDeTexto(numero, "6");
 			introducidos++;
 		}else if(document.getElementById("textoDiv7").innerHTML == ""){
-			//alert("Div7 Vacio!");
 			AgregarLineaDeTexto(numero, "7");
 			introducidos++;
 		}
@@ -113,18 +106,16 @@ function agregarNumero(numero){
 	}
 }
 
-function checar(){
+function checar(){//ve si el usuario gano o perdio el nivel, checa todos los div usados
 	while(numChecar <= nivel){
 		var tmp1;
 		var tmp2;
-		//alert(document.getElementById("numeroDiv" + numChecar).innerHTML +"numeroDiv" + numChecar + " - " +document.getElementById("textoDiv" + numChecar).innerHTML + "textoDiv" + numChecar);
 		if(document.getElementById("numeroDiv" + numChecar).innerHTML == document.getElementById("textoDiv" + numChecar).innerHTML){
 			numChecar++;
 			ganoNivel = true;
 		}else{
 			ganoNivel = false;
 			msg = "(era un " + document.getElementById("numeroDiv" + numChecar).innerHTML + " en vez de " + document.getElementById("textoDiv" + numChecar).innerHTML + ")";
-			//alert(document.getElementById("numeroDiv" + numChecar).innerHTML + " --- " + document.getElementById("textoDiv" + numChecar).innerHTML);
 			break;
 		}
 	}
@@ -138,21 +129,21 @@ function checar(){
 	win = false;
 }
 
-function pasoNivel () {
+function pasoNivel () {//si el usuario gano el nivel
 	if(nivel < 7){
 		nivel++;
 	}
 	reIniciar(true);
-	cambiarPuntuacion(100);
+	cambiarPuntuacion(parseInt(getPuntuacion()) + 3);
 }
 
-function falloNivel(){
+function falloNivel(){//si el usuario perdio el nivel
 	nivel = 3;
 	cambiarPuntuacion(0);
 	reIniciar(false);
 }
 
-function reIniciar(win){
+function reIniciar(win){//re establece los div's para una nueva ronda
 	ponerNumero = 1;
 	anchoDiv = 1;
 	ocultarDiv();
@@ -162,7 +153,8 @@ function reIniciar(win){
 	mensaje(win, 1);
 	timerSup();
 }
-function mensaje(win , fromm){
+
+function mensaje(win , fromm){//Despliega si gano o perdio ese nivel
 	if(fromm == 1){
 		if(win){
 			document.getElementById("Mensaje").innerHTML =  "</b>Buen Trabajo!</b>";
@@ -175,7 +167,7 @@ function mensaje(win , fromm){
 	}
 }
 
-function limpiarDivNumeros(){
+function limpiarDivNumeros(){//elimina el contenido de todos los div
 	introducidos = 0;
 	document.getElementById("textoDiv1").innerHTML =  "";
 	document.getElementById("textoDiv2").innerHTML =  "";
@@ -194,7 +186,7 @@ function limpiarDivNumeros(){
 	document.getElementById("numeroDiv7").innerHTML =  "";
 }
 
-function ponerAncho(){
+function ponerAncho(){//muestra los div necesarios
 	if(anchoDiv <= nivel){
 		//document.getElementById("textoDiv" + anchoDiv) 
 		//.style.width="70px";
@@ -204,7 +196,7 @@ function ponerAncho(){
 	}
 }
 
-function ocultarDiv(){
+function ocultarDiv(){//oculta todos los div's
 	var ocultarActual = 1;
 	while(ocultarActual <= 7){
 		muestra_oculta("textoDiv" + ocultarActual, false);
@@ -213,7 +205,7 @@ function ocultarDiv(){
 	}
 }
 
-function generarNumeros() {
+function generarNumeros() {//genera los numeros a buscar del usuario
 	if(ponerNumero <= nivel){
 		//document.getElementById("numeroDiv" + ponerNumero) 
 		//.style.width="70px";
@@ -224,16 +216,15 @@ function generarNumeros() {
 	}
 }
 
-function eliminarIntro(){
+function eliminarIntro(){//elimina el div intro
 	elemento=document.getElementById('divStart');
 	elemento.parentNode.removeChild(elemento);
 }
-function AgregarLineaDeTexto(TextoLinea, divAgregar) {
+function AgregarLineaDeTexto(TextoLinea, divAgregar) {//mandas el Texto y el numero del Div al que va a modifical el usuario
 	document.getElementById("textoDiv" + divAgregar).innerHTML +=  TextoLinea;// Agrego nueva linea antes
 }
 
-function doLoad(){
-	// the timeout value should be the same as in the "refresh" meta-tag
+function doLoad(){//Timer para eliminar la pantalla negra de carga
 	setTimeout( "refresh()", 1000 );
 }
 
@@ -252,22 +243,22 @@ function muestra_oculta(id, ocultamuestra){
 		}
 	}
 }
-function timerSup(){
-	setTimeout( "timerOculta()", 500 );
+function timerSup(){// Timer para Ocultar los numeros a buscar
+	setTimeout( "timerOculta()", 800 );
 }
 
-function timerOculta(){
+function timerOculta(){//Complementa el de arriba, timerSup()
 	var ocultarActual = 1;
 	while(ocultarActual <= 7){
 		muestra_oculta("numeroDiv" + ocultarActual, false);
 		ocultarActual++;
 	}
 }
-function cambiarPuntuacion(puntos){
+function cambiarPuntuacion(puntos){//Cambia div de puntiacion
 	document.getElementById("puntuacion").innerHTML =  puntos;
 }
-window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
-	muestra_oculta('contenido_a_mostrar');/* "contenido_a_mostrar" es el nombre de la etiqueta DIV que deseamos mostrar */
+function getPuntuacion(){//Obtienes la Puntuacion
+	return document.getElementById("puntuacion").innerHTML;
 }
 </script>
 
