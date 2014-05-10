@@ -46,8 +46,6 @@
 	display:none;
 	margin-top: 275px;
 	z-index: 5;
-	background-image: url("img/cartaFrente.png");
-	background-repeat: no-repeat;
 }.divNumeroCls{
 	width: 70px;
 	height:85px;
@@ -56,8 +54,6 @@
 	display:none;
 	margin-top: 63px;
 	z-index: 6;
-	background-image: url("img/cartaFrente.png");
-	background-repeat: no-repeat;
 }
 div.Menu {
 	color: #0000D9;
