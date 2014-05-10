@@ -46,6 +46,7 @@
 	display:none;
 	margin-top: 275px;
 	z-index: 5;
+	color: #239baa;
 }.divNumeroCls{
 	width: 70px;
 	height:85px;
@@ -54,6 +55,7 @@
 	display:none;
 	margin-top: 63px;
 	z-index: 6;
+	color: #239baa;
 }
 div.Menu {
 	color: #0000D9;
