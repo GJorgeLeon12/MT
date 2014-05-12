@@ -1,3 +1,4 @@
+
 .MenuOff{
 	height:100%;
 	width:200px;
@@ -9,7 +10,7 @@
 }.MenuOn{
 	background-color:#f4d000;
 	width:200px;
-	display:inline-block;
+		display:inline-block;
 	padding-top:11px;
 	padding-bottom:11px;
 	text-align: center;
@@ -19,13 +20,16 @@
 	max-width:700px;
 	max-height:480px;
 	position:absolute;
-	opacity:0.75;
 }.divStartCls{
 	width:700px;
 	height:480px;
 	max-width:700px;
 	max-height:480px;
 	position:absolute;
+	opacity:0.85;
+	filter:alpha(opacity=85); /* For IE8 and earlier */
+	z-index:100;
+
 	background-color: #7CB6C2;
 	background-image:-webkit-gradient(  
     linear,  
@@ -34,23 +38,24 @@
     color-stop(0.1, #94DAE8),  
     color-stop(0.3, #87C7D4),  
     color-stop(0.9, #7CB6C2));
-	opacity:0.9999995;
-	filter:alpha(opacity=95); /* For IE8 and earlier */
-	z-index:100;
 }.divNumerosUsrCls{
 	width: 70px;
-	height:100px;
+	height:85px;
+	padding-top: 10px;
 	background-color: white;
 	display:none;
 	margin-top: 275px;
 	z-index: 5;
+	color: #239baa;
 }.divNumeroCls{
 	width: 70px;
-	height:100px;
+	height:85px;
+	padding-top: 10px;
 	background-color: white;
 	display:none;
 	margin-top: 63px;
 	z-index: 6;
+	color: #239baa;
 }
 div.Menu {
 	color: #0000D9;
