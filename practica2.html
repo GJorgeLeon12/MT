@@ -19,6 +19,7 @@
 	var ganoNivel = false;
 	var iniciar = false;
 	var msg = "";
+	var corazonPerdido = 0;
 
 	document.onkeydown = keyListener;
 /*
@@ -67,8 +68,11 @@ function keyListener(e){//Listeners!
 		}
 		if(e.keyCode == 82){
 			//limpiarDivNumeros();
-			//reIniciar();
+			quitarCorazon();
 			//muestra_oculta('textoDiv1');
+			/*test*/
+			document.getElementById("corazon1").src="./img/corazon2.png";
+			/*termina test*/
 		}
 	}
 }
@@ -122,7 +126,7 @@ function checar(){//ve si el usuario gano o perdio el nivel, checa todos los div
 	if(ganoNivel == true){
 		pasoNivel();
 	}else{
-		falloNivel();
+		quitarCorazon();
 	}
 	//pasoNivel();//                   ELIMINAR!!!!!!!!!!!!!!!
 	numChecar = 1;
@@ -141,6 +145,7 @@ function falloNivel(){//si el usuario perdio el nivel
 	nivel = 3;
 	cambiarPuntuacion(0);
 	reIniciar(false);
+	ponerCorazon();
 }
 
 function reIniciar(win){//re establece los div's para una nueva ronda
@@ -157,11 +162,15 @@ function reIniciar(win){//re establece los div's para una nueva ronda
 function mensaje(win , fromm){//Despliega si gano o perdio ese nivel
 	if(fromm == 1){
 		if(win){
-			document.getElementById("Mensaje").innerHTML =  "</b>Buen Trabajo!</b>";
+			document.getElementById("Mensaje").innerHTML =  "</b>¡Buen Trabajo!</b>";
 		}else{
-			document.getElementById("Mensaje").innerHTML =  "Error! intentalo de nuevo!" + msg;
+			if(corazonPerdido == 4){
+				document.getElementById("Mensaje").innerHTML =  "¡Juego terminado! ¡Int&eacute;ntalo de nuevo!";
+			}else{
+				document.getElementById("Mensaje").innerHTML =  "¡Error! ¡intentalo de nuevo!<br>" + msg;
+			}
 		}
-		setTimeout( "mensaje(true, 2)", 3500 );
+		setTimeout( "mensaje(true, 2)", 3000 );
 	}else{
 		document.getElementById("Mensaje").innerHTML =  "";
 	}
@@ -227,6 +236,32 @@ function AgregarLineaDeTexto(TextoLinea, divAgregar) {//mandas el Texto y el num
 	document.getElementById("textoDiv" + divAgregar).innerHTML +=  TextoLinea;// Agrego nueva linea antes
 }
 
+function quitarCorazon(){
+	if(corazonPerdido == 1){
+		document.getElementById("corazon2").src="./img/corazon2.png";
+		corazonPerdido++;
+		reIniciar();
+	}else if(corazonPerdido == 2){
+		document.getElementById("corazon3").src="./img/corazon2.png";
+		corazonPerdido++;
+		reIniciar();
+	}if(corazonPerdido == 3){
+		corazonPerdido++;
+		falloNivel();
+	}else{
+		document.getElementById("corazon1").src="./img/corazon2.png";
+		corazonPerdido++;
+		reIniciar();
+	}
+}
+
+function ponerCorazon(){
+	document.getElementById("corazon1").src="./img/corazon1.png";
+	document.getElementById("corazon2").src="./img/corazon1.png";
+	document.getElementById("corazon3").src="./img/corazon1.png";
+	corazonPerdido = 0;	
+}
+
 function doLoad(){//Timer para eliminar la pantalla negra de carga
 	setTimeout( "refresh()", 1000 );
 }
@@ -268,7 +303,11 @@ function getPuntuacion(){//Obtienes la Puntuacion
 
 </head>	
 <body>
-	<div style="width:700px; height:480px; max-width:700px; max-height:480px; font-family: DFPOP1-W9;"><!-- Chinacat  DFPOP1-W9-->
+<!-- Tipos de Letra usados:
+	-Chinacat
+	-DFPOP1-W9
+-->
+	<div style="width:700px; height:480px; max-width:700px; max-height:480px; font-family: DFPOP1-W9;">
 		<div id="divCarga" class="JuegoTextoCls" style="background-color:black; z-index:500;">
 		</div>
 		<div id="divStart" class="divStartCls">
@@ -311,8 +350,14 @@ function getPuntuacion(){//Obtienes la Puntuacion
 		<div style="z-index: 3;padding-left: 320px; margin-top: 410px; position: absolute; font-size:50px;font-family: Chinacat; color: #99F6FF;">
 			Puntuaci&oacute;n:
 		</div>
-		<div id="puntuacion" style="z-index: 99;padding-left: 620px; margin-top: 420px; position: absolute; font-size: 50px;font-family: DFPOP1-W9; color: #99F6FF;" >
+		<div id="puntuacion" class="puntuacion">
 			0
+		</div>
+
+		<div style="z-index: 98;padding-left: 550px; margin-top: 15px; position: absolute;">
+			 <img src="./img/corazon1.png" id="corazon1" width="25" height="25">
+			 <img src="./img/corazon1.png" id="corazon2" width="25" height="25">
+			 <img src="./img/corazon1.png" id="corazon3" width="25" height="25">
 		</div>
 		<div class="JuegoTextoCls" style="z-index:0;">
 			<img src="./img/fondo.png" width="700" height="480">
